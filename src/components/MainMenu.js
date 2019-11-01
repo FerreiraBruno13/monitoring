@@ -23,13 +23,13 @@ const useStyles = makeStyles(theme => ({
 export default function MainMenu() {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
-  const [buttonText, setButtonText] = useState("Hello World")
+  const [buttonText, setButtonText] = useState("Type something to change text")
   const [menuOpen, setMenuOpen] = useState(false);
   const open = Boolean(anchorEl);
 
   const handleInput = ({ target }) => {
     const { value } = target;
-    setButtonText(value ? value : "Hello World")
+    setButtonText(value ? value : "Type something to change text")
   };
 
   const toggleMenu = () => {
