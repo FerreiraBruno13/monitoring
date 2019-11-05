@@ -5,23 +5,21 @@ import 'core-js/stable/promise';
 import 'whatwg-fetch';
 
 import React from 'react';
+import CssBaseLine from "@material-ui/core/CssBaseline";
 import 'typeface-roboto';
 import MainMenu from './MainMenu';
 import Map from './Map';
 
-function App(props) {
+function App() {
   const height = window.innerHeight;
-  console.log(props.children)
 
-  fetch('https://jsonplaceholder.typicode.com/todos/1')
+  fetch('https://jsonplaceholder.typicode.com/todos')
     .then(response => response.json())
     .then(json => console.log(json));
 
-  // Some unknown style is applying margin on the body
-  document.body.style.setProperty("margin", 0);
-
   return (
     <>
+      <CssBaseLine />
       <MainMenu />
       <Map height={height} />
     </>
