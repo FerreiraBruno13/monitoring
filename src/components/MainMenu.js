@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import NavBar from "./NavBar";
 
 import {
@@ -9,8 +9,9 @@ import {
   ListItemText
 } from "@material-ui/core";
 
-import { MoveToInbox as InboxIcon, Mail as MailIcon } from "@material-ui/icons";
+import { Delete, Mail as MailIcon, Eco } from "@material-ui/icons";
 import { makeStyles } from '@material-ui/core/styles';
+import { VelocityLayer } from "leafwind";
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -30,9 +31,10 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function MainMenu(props) {
+export default function MainMenu({ map, setMap }) {
   const classes = useStyles();
   const [menuOpen, setMenuOpen] = useState(false);
+  const windLayer = useRef();
 
   const toggleMenu = () => {
     setMenuOpen(isOpen => !isOpen);
@@ -40,24 +42,51 @@ export default function MainMenu(props) {
 
   const menuItems = [
     {
-      text: 'All mail',
+      text: 'Wind',
       onClick: function(event) {
-        window.open("https://mail.google.com");
-      }
+        const { current } = windLayer;
+
+        if (current) {
+          if (map.hasLayer(current)) {
+            return void current.removeFrom(map);
+          }
+
+          return void current.addTo(map);
+        }
+
+        const now = new Date();
+        const formattedDate = now.toISOString().split("T")[0].replace(/-/g, "");
+        const formattedHour = `0${now.getUTCHours()}`.slice(-2); // Ensures double digit.
+
+        fetch(`https://b2cforecast.climatempo.com.br/datas/windy/global/${formattedDate}/${formattedHour}_10m.json`)
+          .then(response => response.json())
+          .then(data => {
+            const { current } = windLayer;
+
+            if (current) current.removeFrom(map);
+
+            windLayer.current = new VelocityLayer({
+              data: data
+            }).addTo(map);
+        });
+      },
+      IconComponent: Eco
     },
     {
-      text: 'Trash',
+      text: 'Mail',
       onClick: function(event) {
         const { target } = event;
         console.log(target);
-      }
+      },
+      IconComponent: MailIcon
     },
     {
       text: 'Spam',
       onClick: function(event) {
         const { target } = event;
         console.log(target);
-      }
+      },
+      IconComponent: Delete
     }
   ];
 
@@ -67,9 +96,9 @@ export default function MainMenu(props) {
       <Drawer anchor="left" open={menuOpen} onClose={toggleMenu}>
         <div className={classes.sideList}>
           <List>
-            {menuItems.map(({ text, onClick }, index) => (
+            {menuItems.map(({ text, onClick, IconComponent }, index) => (
               <ListItem button key={text} onClick={onClick}>
-                <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+                <ListItemIcon><IconComponent /></ListItemIcon>
                 <ListItemText primary={text} />
               </ListItem>
             ))}
