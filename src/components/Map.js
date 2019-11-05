@@ -2,31 +2,40 @@ import React, { useState, useEffect, useRef } from "react";
 import "leaflet/dist/leaflet.css";
 import { map, tileLayer } from "leaflet";
 
-export default function Map() {
+export default function Map({ map: mainMap, updateMap }) {
   const [divHeight, setDivHeight] = useState(window.innerHeight);
-  let mainMap = useRef();
   const container = useRef();
 
   // const addWMSLayer = (url, options, target) => {
   //   tileLayer.wms(url, options).addTo(target);
   // }
 
-  useEffect(() => {
+  const renderMap = () => {
     const { innerHeight: mainHeight } = window;
     const { height: offset } = getComputedStyle(container.current.parentElement.firstChild);
     const fitHeight = mainHeight - Number(offset.slice(0, -2));
 
     setDivHeight(fitHeight);
 
-    mainMap.current = map(container.current, {
-      center: [0, 0],
-      zoom: 2
+    const newMap = map(container.current, {
+      center: [-23.547778, -46.635833],
+      zoom: 4,
+      maxBounds: [
+        [-180, Infinity],
+        [180, -Infinity]
+      ],
+      maxZoom: 16,
+      minZoom: 3
     });
 
-    tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png").addTo(mainMap.current);
-  }, [container]);
+    updateMap(newMap);
+
+    tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png").addTo(newMap);
+  }
+
+  useEffect(renderMap, [container]);
 
   return (
-    <div style={{ height: divHeight }} ref={container} />
+    <div id="map" style={{ height: divHeight }} ref={container} />
   );
 }
