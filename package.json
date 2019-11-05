@@ -7,6 +7,7 @@
     "@material-ui/icons": "^4.5.1",
     "core-js": "^3.3.6",
     "leaflet": "^1.5.1",
+    "leafwind": "git+ssh://git@bitbucket.org/climatempoteam/leafwind.git",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-scripts": "3.2.0",
