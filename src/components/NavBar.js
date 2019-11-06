@@ -18,6 +18,10 @@ const useStyles = makeStyles(theme => ({
 export default function NavBar({ onClick }) {
   const classes = useStyles();
 
+  const onLogin = () => {
+    window.open("https://www.google.com/nonprofits/account/home?hl=pt-BR");
+  }
+
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -28,7 +32,7 @@ export default function NavBar({ onClick }) {
           <Typography variant="h6" className={classes.title}>
             Monitoring
           </Typography>
-          <Button color="inherit">Login</Button>
+          <Button color="inherit" onClick={onLogin}>Login</Button>
         </Toolbar>
       </AppBar>
     </div>
