@@ -1,7 +1,8 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, Fragment } from 'react';
 import NavBar from "./NavBar";
 
 import {
+  Collapse,
   Drawer,
   List,
   ListItem,
@@ -9,7 +10,7 @@ import {
   ListItemText
 } from "@material-ui/core";
 
-import { Delete, Mail as MailIcon, Eco } from "@material-ui/icons";
+import { ExpandLess, ExpandMore, Mail as MailIcon, Eco, StarBorder } from "@material-ui/icons";
 import { makeStyles } from '@material-ui/core/styles';
 import { VelocityLayer } from "leafwind";
 
@@ -27,22 +28,40 @@ const useStyles = makeStyles(theme => ({
     border: 100,
   },
   sideList: {
-    width: 250
+    width: "100%",
+    maxWidth: 300
+  },
+  nested: {
+    paddingLeft: theme.spacing(4)
   }
 }));
 
-export default function MainMenu({ map, setMap }) {
+export default function MainMenu({ map }) {
   const classes = useStyles();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isLoading, setLoading] = useState(false);
+  const [listItemIndex, setListItemIndex] = useState(0);
+  const [collapseOpen, setCollapseOpen] = useState(false);
   const windLayer = useRef();
 
   const toggleMenu = () => {
     setMenuOpen(isOpen => !isOpen);
   };
 
+  const handleListItemClick = (event, index, onClick = () => {}, subItems) => {
+    setListItemIndex(index);
+    onClick(event);
+    subItems && handleCollapseClick();
+  }
+
+  const handleCollapseClick = () => {
+    setCollapseOpen(!collapseOpen);
+  }
+
   const menuItems = [
     {
       text: 'Wind',
+      IconComponent: Eco,
       onClick: function(event) {
         setLoading(true);
 
@@ -82,24 +101,43 @@ export default function MainMenu({ map, setMap }) {
             setLoading(false);
         });
       }
-      },
-      IconComponent: Eco
     },
     {
       text: 'Mail',
+      IconComponent: MailIcon,
+      subItems:
+          <List component="div" disablePadding>
+            <ListItem button className={classes.nested}>
+              <ListItemIcon>
+                <StarBorder />
+              </ListItemIcon>
+              <ListItemText primary="Starred" />
+            </ListItem>
+            <ListItem button className={classes.nested}>
+              <ListItemIcon>
+                <StarBorder />
+              </ListItemIcon>
+              <ListItemText primary="Starred" />
+            </ListItem>
+            <ListItem button className={classes.nested}>
+              <ListItemIcon>
+                <StarBorder />
+              </ListItemIcon>
+              <ListItemText primary="Starred" />
+            </ListItem>
+          </List>,
       onClick: function(event) {
         const { target } = event;
         console.log(target);
-      },
-      IconComponent: MailIcon
+      }
     },
     {
       text: 'Spam',
+      IconComponent: Eco,
       onClick: function(event) {
         const { target } = event;
         console.log(target);
-      },
-      IconComponent: Delete
+      }
     }
   ];
 
@@ -107,16 +145,25 @@ export default function MainMenu({ map, setMap }) {
     <>
       <NavBar onClick={toggleMenu} />
       <Drawer anchor="left" open={menuOpen} onClose={toggleMenu}>
-        <div className={classes.sideList}>
-          <List>
-            {menuItems.map(({ text, onClick, IconComponent }, index) => (
-              <ListItem button key={text} onClick={onClick}>
+        <List component="nav" className={classes.sideList}>
+          {menuItems.map(({ text, onClick, IconComponent, subItems }, index) => (
+            <Fragment key={index}>
+              <ListItem button
+                disabled={isLoading}
+                key={index}
+                selected={listItemIndex === index}
+                onClick={event => handleListItemClick(event, index, onClick, subItems)}
+              >
                 <ListItemIcon><IconComponent /></ListItemIcon>
                 <ListItemText primary={text} />
+                {subItems && (collapseOpen ? <ExpandLess /> : <ExpandMore />)}
               </ListItem>
-            ))}
-          </List>
-        </div>
+              {subItems && <Collapse in={collapseOpen} timeout="auto" unmountOnExit>
+                {subItems}
+              </Collapse>}
+            </Fragment>
+          ), menuItems)}
+        </List>
       </Drawer>
     </>
   );
