@@ -44,9 +44,14 @@ export default function MainMenu({ map, setMap }) {
     {
       text: 'Wind',
       onClick: function(event) {
+        setLoading(true);
+
+        // this.selected = !this.selected;
         const { current } = windLayer;
 
         if (current) {
+          setLoading(false);
+
           if (map.hasLayer(current)) {
             return void current.removeFrom(map);
           }
@@ -66,9 +71,17 @@ export default function MainMenu({ map, setMap }) {
             if (current) current.removeFrom(map);
 
             windLayer.current = new VelocityLayer({
-              data: data
+              data: data,
+              displayOptions: {
+                speedUnit: 'km/h'
+              },
+              lineWidth: 2,
+              maxVelocity: 100,
             }).addTo(map);
+
+            setLoading(false);
         });
+      }
       },
       IconComponent: Eco
     },
