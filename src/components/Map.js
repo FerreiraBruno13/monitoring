@@ -30,7 +30,7 @@ export default function Map({ map: mainMap, updateMap }) {
 
     updateMap(newMap);
 
-    tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png").addTo(newMap);
+    tileLayer("https://{s}.tile.osm.org/{z}/{x}/{y}.png").addTo(newMap);
   }
 
   useEffect(renderMap, [container]);

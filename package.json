@@ -2,10 +2,12 @@
   "name": "monitoring",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://ferreirabruno13.github.io/monitoring/",
   "dependencies": {
-    "@material-ui/core": "^4.5.2",
+    "@material-ui/core": "^4.6.0",
     "@material-ui/icons": "^4.5.1",
-    "core-js": "^3.3.6",
+    "core-js": "^3.4.0",
+    "gh-pages": "^2.1.1",
     "leaflet": "^1.5.1",
     "leafwind": "git+ssh://git@bitbucket.org/climatempoteam/leafwind.git",
     "react": "^16.11.0",
@@ -18,7 +20,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
