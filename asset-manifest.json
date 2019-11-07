@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.js": "/monitoring/static/js/main.740c15b3.chunk.js",
-    "main.js.map": "/monitoring/static/js/main.740c15b3.chunk.js.map",
+    "main.js": "/monitoring/static/js/main.ee22af49.chunk.js",
+    "main.js.map": "/monitoring/static/js/main.ee22af49.chunk.js.map",
     "runtime-main.js": "/monitoring/static/js/runtime-main.60457ef1.js",
     "runtime-main.js.map": "/monitoring/static/js/runtime-main.60457ef1.js.map",
     "static/css/2.a3cf0733.chunk.css": "/monitoring/static/css/2.a3cf0733.chunk.css",
     "static/js/2.3347333f.chunk.js": "/monitoring/static/js/2.3347333f.chunk.js",
     "static/js/2.3347333f.chunk.js.map": "/monitoring/static/js/2.3347333f.chunk.js.map",
     "index.html": "/monitoring/index.html",
-    "precache-manifest.75a5c529d0531919feacd6247f0a1d7a.js": "/monitoring/precache-manifest.75a5c529d0531919feacd6247f0a1d7a.js",
+    "precache-manifest.1b57c42e4500dc4b47c066c1b0d0117e.js": "/monitoring/precache-manifest.1b57c42e4500dc4b47c066c1b0d0117e.js",
     "service-worker.js": "/monitoring/service-worker.js",
     "static/css/2.a3cf0733.chunk.css.map": "/monitoring/static/css/2.a3cf0733.chunk.css.map",
     "static/media/index.css": "/monitoring/static/media/roboto-latin-900italic.ebf6d164.woff2"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.60457ef1.js",
     "static/css/2.a3cf0733.chunk.css",
     "static/js/2.3347333f.chunk.js",
-    "static/js/main.740c15b3.chunk.js"
+    "static/js/main.ee22af49.chunk.js"
   ]
 }
