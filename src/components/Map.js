@@ -10,12 +10,16 @@ export default function Map({ map: mainMap, updateMap }) {
   //   tileLayer.wms(url, options).addTo(target);
   // }
 
-  const renderMap = () => {
+  const updateHeight = () => {
     const { innerHeight: mainHeight } = window;
     const { height: offset } = getComputedStyle(container.current.parentElement.firstChild);
     const fitHeight = mainHeight - Number(offset.slice(0, -2));
 
     setDivHeight(fitHeight);
+  }
+
+  const renderMap = () => {
+    updateHeight();
 
     const newMap = map(container.current, {
       center: [-23.547778, -46.635833],
@@ -34,6 +38,8 @@ export default function Map({ map: mainMap, updateMap }) {
   }
 
   useEffect(renderMap, [container]);
+
+  window.addEventListener("resize", updateHeight);
 
   return (
     <div id="map" style={{ height: divHeight }} ref={container} />
