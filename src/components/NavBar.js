@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { AppBar, Toolbar, Typography, Button, IconButton } from '@material-ui/core/';
 import MenuIcon from '@material-ui/icons/Menu';
 import OnlineStatus from './OnlineStatus';
+import Clock from "./Clock";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -33,6 +34,7 @@ export default function NavBar({ onClick }) {
           <Typography variant="h6" className={classes.title}>
             Monitoring
           </Typography>
+          <Clock />
           <OnlineStatus />
           <Button color="inherit" onClick={onLogin}>Login</Button>
         </Toolbar>
