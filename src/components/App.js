@@ -11,16 +11,14 @@ import MainMenu from './MainMenu';
 import Map from './Map';
 
 export default function App() {
-  const height = window.innerHeight;
   const [map, setMap] = useState();
-
   const updateMap = newMap => setMap(newMap);
 
   return (
     <>
       <CssBaseline />
       <MainMenu map={map} />
-      <Map height={height} mainMap={map} updateMap={updateMap} />
+      <Map mainMap={map} updateMap={updateMap} />
     </>
   );
 }
