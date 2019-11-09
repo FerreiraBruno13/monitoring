@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.js": "/monitoring/static/js/main.2630b6ba.chunk.js",
-    "main.js.map": "/monitoring/static/js/main.2630b6ba.chunk.js.map",
+    "main.js": "/monitoring/static/js/main.434db65a.chunk.js",
+    "main.js.map": "/monitoring/static/js/main.434db65a.chunk.js.map",
     "runtime-main.js": "/monitoring/static/js/runtime-main.60457ef1.js",
     "runtime-main.js.map": "/monitoring/static/js/runtime-main.60457ef1.js.map",
     "static/css/2.a3cf0733.chunk.css": "/monitoring/static/css/2.a3cf0733.chunk.css",
-    "static/js/2.25c0b566.chunk.js": "/monitoring/static/js/2.25c0b566.chunk.js",
-    "static/js/2.25c0b566.chunk.js.map": "/monitoring/static/js/2.25c0b566.chunk.js.map",
+    "static/js/2.6be68c64.chunk.js": "/monitoring/static/js/2.6be68c64.chunk.js",
+    "static/js/2.6be68c64.chunk.js.map": "/monitoring/static/js/2.6be68c64.chunk.js.map",
     "index.html": "/monitoring/index.html",
-    "precache-manifest.c3a845d5ec3495eac45993bb68278fc5.js": "/monitoring/precache-manifest.c3a845d5ec3495eac45993bb68278fc5.js",
+    "precache-manifest.f7d28eb28e17b2988e316d3af14ed65f.js": "/monitoring/precache-manifest.f7d28eb28e17b2988e316d3af14ed65f.js",
     "service-worker.js": "/monitoring/service-worker.js",
     "static/css/2.a3cf0733.chunk.css.map": "/monitoring/static/css/2.a3cf0733.chunk.css.map",
     "static/media/index.css": "/monitoring/static/media/roboto-latin-900italic.ebf6d164.woff2"
@@ -16,7 +16,7 @@
   "entrypoints": [
     "static/js/runtime-main.60457ef1.js",
     "static/css/2.a3cf0733.chunk.css",
-    "static/js/2.25c0b566.chunk.js",
-    "static/js/main.2630b6ba.chunk.js"
+    "static/js/2.6be68c64.chunk.js",
+    "static/js/main.434db65a.chunk.js"
   ]
 }
