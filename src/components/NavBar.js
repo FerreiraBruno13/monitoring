@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { AppBar, Toolbar, Typography, Button, IconButton } from '@material-ui/core/';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -19,6 +19,16 @@ const useStyles = makeStyles(theme => ({
 
 export default function NavBar({ onClick }) {
   const classes = useStyles();
+  const getOrientation = () => {
+    const { innerWidth, innerHeight } = window;
+
+    return innerWidth > innerHeight ? "landscape" : "portrait";
+  }
+  const [orientation, setOrientation] = useState(getOrientation());
+
+  window.addEventListener("resize", function() {
+    setOrientation(getOrientation());
+  });
 
   const onLogin = () => {
     window.open("https://www.google.com/nonprofits/account/home?hl=pt-BR");
@@ -34,7 +44,7 @@ export default function NavBar({ onClick }) {
           <Typography variant="h6" className={classes.title}>
             Monitoring
           </Typography>
-          <Clock />
+          {orientation === "landscape" && <Clock />}
           <OnlineStatus />
           <Button color="inherit" onClick={onLogin}>Login</Button>
         </Toolbar>
